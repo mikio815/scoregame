@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mikio815/scoregame-api/handlers"
+	"scoregame-api/handlers"
 
 	"github.com/gin-gonic/gin"
 )
