@@ -1,4 +1,4 @@
-module scoregame-api
+module github.com/mikio815/scoregame-api
 
 go 1.23.4
 
