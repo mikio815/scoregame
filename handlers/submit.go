@@ -7,13 +7,17 @@ import (
 )
 
 type SubmitRequest struct {
-	PlayerID string `json:"player_id"`
-	Score    int    `json:"score"`
+	PlayerID string  `json:"player_id"`
+	Score    int     `json:"score"`
+	Combo    int     `json:"combo"`
+	PlayTime float64 `json:"play_time"`
 }
 
 type SubmitResponse struct {
-	Score int    `json:"score"`
-	Rank  string `json:"rank"`
+	Score      int      `json:"score"`
+	Rank       string   `json:"rank"`
+	Suspicious bool     `json:"suspicious"`
+	Warning    []string `json:"warnings"`
 }
 
 func SubmitScore(c *gin.Context) {
@@ -31,8 +35,15 @@ func SubmitScore(c *gin.Context) {
 	}
 
 	resp := SubmitResponse{
-		Score: req.Score,
-		Rank:  rank,
+		Score:      req.Score,
+		Rank:       rank,
+		Suspicious: false,
+		Warning:    []string{"Score Correct"},
+	}
+
+	if req.PlayTime < 2.0 && req.Score > 100000 {
+		resp.Suspicious = true
+		resp.Warning = []string{"Play time too short for the score!"}
 	}
 
 	c.JSON(http.StatusOK, resp)

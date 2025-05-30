@@ -1,1 +1,1 @@
-curl -X POST http://localhost:8080/submit -H "Content-Type: application/json" -d '{"player_id": "1", "score": '"$1"'}'
+curl -X POST http://localhost:8080/submit -H "Content-Type: application/json" -d '{"player_id": "1", "score": '"$1"', "play_time": '"$2"'}'
